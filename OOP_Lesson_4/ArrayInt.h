@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <cassert>
 class ArrayInt
 {
@@ -12,7 +12,7 @@ public:
 		assert(length >= 0);
 		if (length > 0)
 			m_data = new int[length];
-		//íàäî ìàññèâ îáíóëèòü
+		//Ð½Ð°Ð´Ð¾ Ð¼Ð°ÑÑÐ¸Ð² Ð¾Ð±Ð½ÑƒÐ»Ð¸Ñ‚ÑŒ
 		else
 			m_data = nullptr;
 	}
@@ -47,8 +47,8 @@ public:
 			return;
 		}
 		int* data = new int[newLength];
-		//íàäî ìàññèâ îáíóëèòü
-		if (m_length > 0) // âîò ýòî óñëîâèå íå íóæíî. m_length â ýòîé òî÷êå âñåãäà áóäåò > 0, äðóãèå ñëó÷àè îáðàáîòàíû âûøå
+		//Ð½Ð°Ð´Ð¾ Ð¼Ð°ÑÑÐ¸Ð² Ð¾Ð±Ð½ÑƒÐ»Ð¸Ñ‚ÑŒ
+		if (m_length > 0) // Ð²Ð¾Ñ‚ ÑÑ‚Ð¾ ÑƒÑÐ»Ð¾Ð²Ð¸Ðµ Ð½Ðµ Ð½ÑƒÐ¶Ð½Ð¾. m_length Ð² ÑÑ‚Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐµ Ð²ÑÐµÐ³Ð´Ð° Ð±ÑƒÐ´ÐµÑ‚ > 0, Ð´Ñ€ÑƒÐ³Ð¸Ðµ ÑÐ»ÑƒÑ‡Ð°Ð¸ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ñ‹ Ð²Ñ‹ÑˆÐµ
 		{
 			int elementsToCopy = (newLength > m_length) ? m_length : newLength;
 			for (int index = 0; index < elementsToCopy; ++index)
