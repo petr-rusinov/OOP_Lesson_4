@@ -1,2 +1,2 @@
 #include "ArrayInt.h"
-//Класс ArrayInt
+//Класс  ArrayInt
