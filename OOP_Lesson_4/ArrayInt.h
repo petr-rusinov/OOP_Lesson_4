@@ -12,6 +12,7 @@ public:
 		assert(length >= 0);
 		if (length > 0)
 			m_data = new int[length];
+		//надо массив обнулить
 		else
 			m_data = nullptr;
 	}
@@ -19,6 +20,43 @@ public:
 	~ArrayInt()
 	{
 		delete[] m_data;
+	}
+
+	void erase()
+	{
+		delete[] m_data;
+		m_data = nullptr;
+		m_length = 0;
+	}
+
+	int getLength() { return m_length; }
+
+	int& operator[] (int index)
+	{
+		assert(index >= 0 && index < m_length);
+		return m_data[index];
+	}
+
+	void resize(int newLength)
+	{
+		if (newLength == m_length)
+			return;
+		if (newLength <= 0)
+		{
+			erase();
+			return;
+		}
+		int* data = new int[newLength];
+		//надо массив обнулить
+		if (m_length > 0) // вот это условие не нужно. m_length в этой точке всегда будет > 0, другие случаи обработаны выше
+		{
+			int elementsToCopy = (newLength > m_length) ? m_length : newLength;
+			for (int index = 0; index < elementsToCopy; ++index)
+				data[index] = m_data[index];
+		}
+		delete[] m_data;
+		m_data = data;
+		m_length = newLength;
 	}
 };
 
