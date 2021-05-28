@@ -89,18 +89,23 @@ public:
 	int getTotal() 
 	{
 		int s = 0;
-
+		int acesNum = 0;
 		for (Card* c : m_cards)
 		{
 			s += static_cast<int>(c->getValue());
 			int val = c->getValue();
-			if (val > ACE && val < JACK)
+			if (val >= ACE && val < JACK)
+			{
+				if (val == ACE) acesNum++;
 				s += val;
+			}
 			else if (val >= JACK)
 				s += 10;
-			//обработать ситуацию с тузом
-
-
+		}
+		if (acesNum < 2) //Если вдруг тузов больше 1, нет смысла их считать как 11
+		{
+			if ((s + 10) <= 21) //Пробуем считать туз как 11, поэтому добавляем к общей сумме 10
+				s += 10;
 		}
 		return s;
 	}
