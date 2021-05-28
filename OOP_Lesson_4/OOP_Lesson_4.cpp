@@ -103,4 +103,18 @@ int main()
 	Hand hand;
 	int v = hand.getValue();
 	task_2();
+
+	srand(time(0));
+
+	ArrayInt arr;
+	for (int i = 0; i < 10; ++i)
+		arr.push_back(rand()%100);
+	arr.print();
+	arr.sort();
+	arr.print();
+	//arr.deleteAfter(3);
+	//arr.pop_back();
+	//arr.deleteBefore(3);
+	arr.pop_front();
+	arr.print();
 }

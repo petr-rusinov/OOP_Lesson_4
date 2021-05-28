@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <cassert>
+#include <iostream>
+using namespace std;
 
 //1.Добавить в контейнерный класс, который был написан в этом уроке, методы:
 //	- для удаления последнего элемента массива(аналог функции pop_back() в векторах)
@@ -19,51 +21,23 @@ public:
 		assert(length >= 0);
 		if (length > 0)
 			m_data = new int[length];
-		//надо массив обнулить
 		else
 			m_data = nullptr;
 	}
-
 	~ArrayInt()
 	{
 		delete[] m_data;
 	}
-
-	void erase()
-	{
-		delete[] m_data;
-		m_data = nullptr;
-		m_length = 0;
-	}
-
-	int getLength() { return m_length; }
-
-	int& operator[] (int index)
-	{
-		assert(index >= 0 && index < m_length);
-		return m_data[index];
-	}
-
-	void resize(int newLength)
-	{
-		if (newLength == m_length)
-			return;
-		if (newLength <= 0)
-		{
-			erase();
-			return;
-		}
-		int* data = new int[newLength];
-		//надо массив обнулить
-		if (m_length > 0) // вот это условие не нужно. m_length в этой точке всегда будет > 0, другие случаи обработаны выше
-		{
-			int elementsToCopy = (newLength > m_length) ? m_length : newLength;
-			for (int index = 0; index < elementsToCopy; ++index)
-				data[index] = m_data[index];
-		}
-		delete[] m_data;
-		m_data = data;
-		m_length = newLength;
-	}
+	void erase();
+	int getLength();
+	int& operator[] (int index);
+	void resize(int newLength);
+	void insertBefore(int value, int index);
+	void push_back(int value);
+	void deleteAfter(int index);
+	void deleteBefore(int index);
+	void pop_back();
+	void pop_front();
+	void print();
+	void sort();
 };
-
