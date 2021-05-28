@@ -65,8 +65,6 @@ enum eSuit { CLUBS, SPADES, DIAMONDS, HEARTS }; //крести, пики, буб
 enum eRank { ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 
 
-const int cardsOneSuit = 13; //количество карт одной масти
-
 class Card
 {
 	eSuit m_suit;
