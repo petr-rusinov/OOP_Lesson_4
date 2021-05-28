@@ -1,5 +1,4 @@
 ﻿#include "ArrayInt.h"
-// Класс ArrayInt
 
 void ArrayInt::erase()
 {
@@ -27,7 +26,7 @@ void ArrayInt::resize(int newLength)
 	}
 	int* data = new int[newLength];
 
-	if (m_length > 0) // вот это условие не нужно. m_length в этой точке всегда будет > 0, другие случаи обработаны выше
+	if (m_length > 0) 
 	{
 		int elementsToCopy = (newLength > m_length) ? m_length : newLength;
 		for (int index = 0; index < elementsToCopy; ++index)
