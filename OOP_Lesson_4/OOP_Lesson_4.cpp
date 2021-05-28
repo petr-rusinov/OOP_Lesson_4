@@ -54,44 +54,53 @@ void task_2()
 
 
 
-enum class eSuit { CLUBS, SPADES, DIAMONDS, HEARTS }; //крести, пики, буби, черви
-enum eValue { ACE = 1, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO, ONE };
+enum eSuit { CLUBS, SPADES, DIAMONDS, HEARTS }; //крести, пики, буби, черви
+enum eRank { ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 
-const int cardsOneSuit = 14; //количество карт одной масти
+
+const int cardsOneSuit = 13; //количество карт одной масти
 
 class Card
 {
 	eSuit m_suit;
-	eValue m_value;
-	bool m_position;
+	eRank m_rank;
+	bool m_isFaceUp;
 public:
-	Card(eSuit suit, eValue value, bool pos) : m_suit(suit), m_value(value), m_position(pos) {}
-	void flip() { m_position = !m_position; }
-	eValue getValue() { return m_value; }
+	Card(eSuit suit, eRank value, bool pos) : m_suit(suit), m_rank(value), m_isFaceUp(pos) {}
+	void flip() { m_isFaceUp = !m_isFaceUp; }
+	int getValue() { return m_rank; }
 };
 
 class Hand
 {
 private:
-	vector<Card> m_deck; //колода карт
+	vector<Card*> m_cards; //колода карт
 public:
 	Hand()
 	{
 		for (int i = 1; i <= cardsOneSuit; i++)
 		{
-			Card card(eSuit::CLUBS, static_cast<eValue>(i), true);
-			m_deck.push_back(card);
+			Card card(eSuit::CLUBS, static_cast<eRank>(i), true);
+			m_cards.push_back(&card);
 		}
 	}
-	void add(Card& card) { m_deck.push_back(card); }
-	void clear() { m_deck.clear(); }
-	int getValue() 
+	void add(Card* pCard) { m_cards.push_back(pCard); }
+	void clear() { m_cards.clear(); }
+	int getTotal() 
 	{
 		int s = 0;
 
-		for (Card c : m_deck)
+		for (Card* c : m_cards)
 		{
-			s += static_cast<int>(c.getValue());
+			s += static_cast<int>(c->getValue());
+			int val = c->getValue();
+			if (val > ACE && val < JACK)
+				s += val;
+			else if (val >= JACK)
+				s += 10;
+			//обработать ситуацию с тузом
+
+
 		}
 		return s;
 	}
@@ -101,7 +110,7 @@ public:
 int main()
 {
 	Hand hand;
-	int v = hand.getValue();
+	int v = hand.getTotal();
 	task_2();
 
 	srand(time(0));
