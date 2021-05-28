@@ -76,14 +76,7 @@ class Hand
 private:
 	vector<Card*> m_cards; //колода карт
 public:
-	Hand()
-	{
-		for (int i = 1; i <= cardsOneSuit; i++)
-		{
-			Card card(eSuit::CLUBS, static_cast<eRank>(i), true);
-			m_cards.push_back(&card);
-		}
-	}
+
 	void add(Card* pCard) { m_cards.push_back(pCard); }
 	void clear() { m_cards.clear(); }
 	int getTotal() 
@@ -92,7 +85,6 @@ public:
 		int acesNum = 0;
 		for (Card* c : m_cards)
 		{
-			s += static_cast<int>(c->getValue());
 			int val = c->getValue();
 			if (val >= ACE && val < JACK)
 			{
@@ -115,7 +107,16 @@ public:
 int main()
 {
 	Hand hand;
+	Card c1(SPADES, NINE, true);
+	Card c2(SPADES, TWO, true);
+	Card c3(SPADES, ACE, true);
+
+	hand.add(&c1);
+	hand.add(&c2);
+	hand.add(&c3);
+
 	int v = hand.getTotal();
+	cout << "Hand total score: " << v << endl;
 	task_2();
 
 	srand(time(0));
