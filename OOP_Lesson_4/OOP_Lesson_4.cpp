@@ -1,6 +1,9 @@
 ﻿#include <iostream>
 #include "ArrayInt.h"
 #include <vector>
+#include <algorithm>
+
+using namespace std;
 
 //1.Добавить в контейнерный класс, который был написан в этом уроке, методы:
 //	- для удаления последнего элемента массива(аналог функции pop_back() в векторах)
@@ -12,7 +15,36 @@
 
 
 //2.Дан вектор чисел, требуется выяснить, сколько среди них различных.Постараться использовать максимально быстрый алгоритм.
-//
+
+int findDifferent(vector<int> vec)
+{
+	vector<int>::const_iterator iter;
+	sort(vec.begin(), vec.end());
+
+	int i = 1; //счетчик различных чисел. в худшем случае - все числа одинаковые, поэтому минимально i==1
+
+	int prev = vec[0]; //для хранения предыдущих значений
+
+	//последовательно сравниваем предыдущее значение с текущим в отсортированном векторе
+
+	for (iter = vec.begin()+1; iter != vec.end(); ++iter)
+	{
+		if (*iter != prev)
+		{
+			++i;
+		}
+		prev = *iter;
+	}
+	return i;
+}
+
+void task_2()
+{
+	vector<int> v = { 5, 3, 4, 3, 2, 4, 1, 6, 7, 25, 32, 3, 55, 1, 1, 4 };
+
+	cout << "There are " << findDifferent(v) << " different values in vector" << endl;
+}
+
 //3.Реализовать класс Hand, который представляет собой коллекцию карт.В классе будет одно поле : 
 //	вектор указателей карт(удобно использовать вектор, т.к.это по сути динамический массив, а тип его 
 //	элементов должен быть - указатель на объекты класса Card).Также в классе Hand должно быть 3 метода :
@@ -20,7 +52,7 @@
 //	- метод Clear, который очищает руку от карт
 //	- метод GetValue, который возвращает сумму очков карт руки(здесь предусмотреть возможность того, что туз может быть равен 11).
 
-using namespace std;
+
 
 enum class eSuit { CLUBS, SPADES, DIAMONDS, HEARTS }; //крести, пики, буби, черви
 enum eValue { ACE = 1, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO, ONE };
@@ -70,4 +102,5 @@ int main()
 {
 	Hand hand;
 	int v = hand.getValue();
+	task_2();
 }
